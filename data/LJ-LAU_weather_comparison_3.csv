@@ -1,0 +1,5 @@
+location,date,t_min,t_avg,t_max,prec_total,snow,sunrise,sunset,day_time,sun_time,sunrise_str,sunset_str,day_time_str,sun_time_str,type
+Lausanne,2025-12-01,3.77,5.19,6.79,8.31,0.0,7.86,16.83,8.97,2.99,07:51,16:49,08:58,02:59,7-day-mean
+Ljubljana,2025-12-01,-0.64,1.91,5.24,5.54,0.0,7.31,16.33,9.03,3.51,07:18,16:19,09:01,03:30,7-day-mean
+Ljubljana,2025-12-01,-2.0,1.4,5.3,0.0,0.0,7.38,16.3,8.91,5.22,07:22,16:18,08:54,05:13,Today
+Lausanne,2025-12-01,4.4,5.4,6.4,1.4,0.0,7.95,16.8,8.85,3.92,07:57,16:48,08:51,03:55,Today

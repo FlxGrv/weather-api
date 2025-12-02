@@ -1,0 +1,54 @@
+paths:
+  #set here the path to where you would want to locally save your data csv
+  data_csv: "C:/Users/felix/Documents/Python Projects/Weather API/data/LJ-LAU_weather_comparison_3.csv"
+
+Locations:
+  #names of places (just for readibility) and coordinates (actually used by the API)
+  name1: "Ljubljana"
+  coord1: [46.05, 14.51]
+  name2: "Lausanne"
+  coord2: [46.51, 6.63]
+  #set timezone as found here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "Europe/Berlin"
+  
+API:
+  api_url: "https://api.open-meteo.com/v1/forecast"
+  #variables used by the API (beware, changing these might break the code)
+  #currently only daily variables, no hourly ones
+  #as found here: https://open-meteo.com/en/docs#daily_parameter_definition
+  variables:
+    - temperature_2m_min
+    - temperature_2m_mean
+    - temperature_2m_max
+    - precipitation_sum
+    - snowfall_sum
+    - sunrise
+    - sunset
+    - daylight_duration
+    - sunshine_duration
+  #used to get today's values
+  #we currently want data for yesterday (when daily variables are final) and calculate the average for the 7 days before yesterday
+  #hence a forecast of 0 and 8 days of past_days
+  forecast: 0
+  #interval of time selected to calculate mean values
+  past_days: 8
+
+Plot:
+  #set line and marker colors for each locattion here
+  color1: "green"
+  color2: "blue"
+  #set characteristics of x-axis labels
+  x_axis_labels:
+    axis: x
+    labelrotation: 45
+    labelsize: 7
+    pad: 1
+  #set format of the dates that are the x-labels in each graph
+  date_format: "%d %b %y"
+  #set marker size for the plots
+  marker_size: 4
+  #set values for figure sizes
+  figsize1: 10
+  figsize2: 8
+  #set adjustment distance between plots
+  adjust: 0.5
