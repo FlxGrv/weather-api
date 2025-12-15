@@ -1,4 +1,4 @@
-# Daily weather timeries builder for 2 defined places
+# Daily weather timeseries builder for 2 defined places
 
 This project contains python code that fetches data from the Open Meteo API for 2 defined locations.
 It then transforms the data in order to plot both the daily values of the previous day and the average of the 7 last days (or whatever number suits you) for a selected number of indicators.
@@ -14,6 +14,12 @@ It gets daily data from the Open Meteo API (https://open-meteo.com/) for 2 place
 For each selected indicator (list below), and each location, it generates 2 measures per day: yesterday's value and the average value for the 7 previous days. These values get saved in a csv file stored locally.
 It then plots the values on 4 graphs and allows for a quick comparion between the selected locations.
 If run every day, it will create a timeseries.
+
+The whole thing consists of 3 modules, here in order of execution:
+1) get_weather_data.py
+2) weather_data_transformation.py
+3) weather_data_plot.py
+They are all called in the main script: weather-main.py
 
 Currently selected indicators (you can select others, but it will probably break the code):
 
@@ -37,6 +43,7 @@ Ideas for improvement (not in any order):
 - make nicer plots
 - add more customable points in the config file
 - add a script that would detect missing dates in the csv and add the relevant data
+- probably optimize the scripting
 
 ## Getting Started
 
