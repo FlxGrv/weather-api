@@ -1,3 +1,9 @@
+'''
+This is the second step of the weather_data process (see weather-main.py).
+In this module a function is defined that uses the data generated in the previous module, get_weather_data,
+and transform it in order to return a pandas dataframe and also save the data in a CSV file.
+'''
+
 import yaml
 from pathlib import Path
 import pandas as pd
@@ -8,7 +14,7 @@ import pandas as pd
 with open("config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
-def weatherTransfo(df):
+def weatherTransfo(df: pd.DataFrame) -> pd.DataFrame:
     """
     Transforms the data obtained by the getWeatherData function, for better analysis possibilities and readability.
     Specifically tailored for the current load of fetched variables.
@@ -94,20 +100,36 @@ def weatherTransfo(df):
     #TOTAL VALUES GENERATED FOR TODAY
     daily_data = pd.concat([df_7_means,today_data], axis = 0, ignore_index= True)
 
+    print("Data transformed.")
     #APPEND THE DATA TO THE MAIN CSV IN ORDER TO BUILD HISTORICAL DATA
     #avoid saving 2 times the info for the same day
 
-    if csv_path.exists():
-        csv_data = pd.read_csv(csv_path, parse_dates=["date"])
+    try:
 
-        if uperLimit not in csv_data["date"].values:
-            csv_data = pd.concat([csv_data, daily_data], ignore_index= True)
-            csv_data.to_csv(csv_path, index=False)
+        if csv_path.exists():
+            csv_data = pd.read_csv(csv_path, parse_dates=["date"])
 
-    else:
-    #useful for first iteration of the code, when the csv doesn't exist
+            if uperLimit not in csv_data["date"].values:
+                csv_data = pd.concat([csv_data, daily_data], ignore_index= True)
+                csv_data.to_csv(csv_path, index=False)
+
+        else:
+        #useful for first iteration of the code, when the csv doesn't exist
             csv_data = daily_data
-    #make sure updated data always exists as we want to plot it later on
+        #make sure updated data always exists as we want to plot it later on
             csv_data.to_csv(csv_path, index=False)
+    
+    except FileNotFoundError:
+        print(f"Directory does not exist: {csv_path.parent}")
+    except PermissionError:
+        print(f"Permission denied. Is the file open? -> {csv_path}")
+    except UnicodeEncodeError:
+        print("Encoding error while writing CSV.")
+    except pd.errors.EmptyDataError:
+        print(f"CSV exists but is empty or corrupted: {csv_path}")
+    except Exception as e:
+        print(f"Unexpected error while handling CSV: {e}")
+    
+    print("Data saved in csv.")
     
     return csv_data
